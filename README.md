@@ -36,7 +36,7 @@ This IoT and satellite-enabled system simplifies environmental monitoring by int
 ### Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-repo/environmental-monitoring-system.git
+   git clone https://github.com/rfc391/environmental-monitoring-system.git
    cd environmental-monitoring-system
    ```
 
