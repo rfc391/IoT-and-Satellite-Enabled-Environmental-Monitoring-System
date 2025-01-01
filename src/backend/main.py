@@ -1,12 +1,12 @@
 
-"""Backend Module - Main Application"""
-
 from flask import Flask, request, jsonify
 import sqlite3
 import os
+import requests
 
 app = Flask(__name__)
 DATABASE = "data.db"
+CLOUDFLARE_ROUTER_URL = "https://apexsecurityint.com/dry-truth-1f56"
 
 def init_db():
     """Initialize the database"""
@@ -26,14 +26,23 @@ def init_db():
 def ingest_data():
     """Endpoint to ingest IoT sensor data"""
     data = request.json
-    conn = sqlite3.connect(DATABASE)
-    cursor = conn.cursor()
-    cursor.execute('''INSERT INTO sensor_data (timestamp, temperature, humidity, air_quality)
-                      VALUES (?, ?, ?, ?)''', 
-                   (data['timestamp'], data['temperature'], data['humidity'], data['air_quality']))
-    conn.commit()
-    conn.close()
-    return jsonify({"status": "success", "message": "Data ingested"}), 200
+    try:
+        conn = sqlite3.connect(DATABASE)
+        cursor = conn.cursor()
+        cursor.execute('''INSERT INTO sensor_data (timestamp, temperature, humidity, air_quality)
+                          VALUES (?, ?, ?, ?)''', 
+                       (data['timestamp'], data['temperature'], data['humidity'], data['air_quality']))
+        conn.commit()
+        conn.close()
+
+        # Forward data to Cloudflare worker
+        response = requests.post(CLOUDFLARE_ROUTER_URL, json=data)
+        if response.status_code != 200:
+            return jsonify({"status": "success", "message": "Data ingested locally, but Cloudflare forwarding failed"}), 206
+
+        return jsonify({"status": "success", "message": "Data ingested and forwarded to Cloudflare"}), 200
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
 
 @app.route('/data', methods=['GET'])
 def get_data():
@@ -48,4 +57,4 @@ def get_data():
 if __name__ == "__main__":
     if not os.path.exists(DATABASE):
         init_db()
-    app.run(debug=True, port=8000)
+    app.run(debug=True, port=5001)  # Updated port
