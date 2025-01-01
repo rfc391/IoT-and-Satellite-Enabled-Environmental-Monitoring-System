@@ -1,0 +1,11 @@
+
+flask
+fastapi
+uvicorn
+pandas
+numpy
+matplotlib
+scikit-learn
+sqlalchemy
+requests
+pytest
