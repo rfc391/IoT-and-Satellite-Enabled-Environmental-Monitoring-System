@@ -1,145 +1,169 @@
-
 # IoT and Satellite-Enabled Environmental Monitoring System
 
+## Table of Contents
+- [Overview](#overview)
+- [Features](#features)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Usage](#usage)
+  - [Running the Flask Backend](#running-the-flask-backend)
+  - [Running the FastAPI Backend](#running-the-fastapi-backend)
+- [Endpoints](#endpoints)
+  - [Flask Endpoints](#flask-endpoints)
+  - [FastAPI Endpoints](#fastapi-endpoints)
+- [Development](#development)
+- [Contributing](#contributing)
+- [License](#license)
+
 ## Overview
-The **IoT and Satellite-Enabled Environmental Monitoring System** is a scalable, modular platform for real-time environmental monitoring. It leverages IoT devices, satellite communication, and cloud infrastructure for seamless data collection, analysis, and visualization.
-
-This system provides:
-- Real-time monitoring of environmental parameters like temperature, humidity, pressure, and air quality.
-- Predictive analytics using advanced machine learning models.
-- A responsive dashboard and RESTful API for data interaction.
-
----
+This IoT and satellite-enabled system simplifies environmental monitoring by integrating modern sensor technologies with predictive analytics. The project focuses on usability, flexibility, and seamless deployment, making it ideal for research, industrial applications, and personal projects.
 
 ## Features
+- **Comprehensive Data Management**: Efficient ingestion and storage of sensor data.
+- **Machine Learning Analytics**: Use advanced models to predict environmental trends.
+- **Flexible API**: RESTful endpoints for easy integration with external systems.
+- **Cloudflare Worker Integration**: Forward data to Cloudflare workers for additional processing (mocked in local tests).
+- **User-Friendly Deployment**: Includes Docker support for quick setup.
 
-### Core Functionalities
-- **IoT Data Collection**: Real-time and batch data collection from IoT sensors.
-- **Predictive Analytics**: Machine learning models for forecasting trends with evaluation metrics like MSE and R².
-- **Interactive Dashboard**: Visualizes data and allows device management.
-- **Public API**: RESTful endpoints for data retrieval and analytics.
-
-### Integrations
-- **Cloudflare Workers**: Optimize API delivery and automate workflows.
-- **GitHub Actions**: CI/CD pipelines for automated testing and deployment.
-- **Docker Support**: Simplified deployment in any environment.
-
----
-
-## Quick Start
+## Getting Started
 
 ### Prerequisites
-- **Python 3.8+**
-- **Docker and Docker Compose** (optional for local testing)
-- **Cloudflare Account** (optional for deployment)
+- Python 3.8 or higher
+- SQLite (bundled with Python)
+- Optional: Docker and Docker Compose
 
 ### Installation
-
-#### Local Environment
 1. Clone the repository:
-    ```bash
-    git clone https://github.com/your-repo/IoT-and-Satellite-Enabled-Environmental-Monitoring-System.git
-    cd IoT-and-Satellite-Enabled-Environmental-Monitoring-System
-    ```
+   ```bash
+   git clone https://github.com/your-repo/environmental-monitoring-system.git
+   cd environmental-monitoring-system
+   ```
 
 2. Install dependencies:
-    ```bash
-    pip install -r requirements.txt
-    ```
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-3. Run the server:
-    ```bash
-    uvicorn src.backend.api:app --reload
-    ```
-    Access the dashboard at `http://localhost:8000/dashboard` and API docs at `http://localhost:8000/docs`.
+3. Initialize the database:
+   ```bash
+   python src/backend/main.py
+   ```
 
-#### Docker Environment
-1. Build and start the container:
-    ```bash
-    docker-compose up --build
-    ```
+## Usage
 
-2. Access the dashboard at `http://localhost:8000/dashboard`.
+### Running the Flask Backend
+1. Navigate to the `src/backend` folder:
+   ```bash
+   cd src/backend
+   ```
 
----
+2. Start the Flask server:
+   ```bash
+   python main.py
+   ```
+   By default, it runs on `http://127.0.0.1:5000`.
 
-## Usage Guide
+### Running the FastAPI Backend
+1. Navigate to the `src/backend` folder:
+   ```bash
+   cd src/backend
+   ```
 
-### Dashboard
-- Add, update, and manage IoT devices.
-- View interactive graphs for historical and real-time data.
+2. Start the FastAPI server:
+   ```bash
+   uvicorn api:app --host 0.0.0.0 --port 8000
+   ```
+   By default, it runs on `http://127.0.0.1:8000`.
 
-### API Endpoints
-1. **Retrieve Real-Time Data**: `GET /api/sensor/realtime`
-2. **Batch Data Retrieval**: `GET /api/sensor/batch?batch_size=10`
-3. **Predictive Analytics**: `POST /api/analytics/predict`
-   - Example payload:
-     ```json
-     [
-       {"temperature": 25.5, "humidity": 55.0, "pressure": 1012.0, "air_quality": 75.0},
-       {"temperature": 22.0, "humidity": 60.0, "pressure": 1015.0, "air_quality": 70.0}
-     ]
-     ```
+## Endpoints
 
----
+### Flask Endpoints
+#### **POST /ingest**
+Ingest sensor data into the system.
+- **Request Body**:
+  ```json
+  {
+      "timestamp": 1735718918.0184543,
+      "temperature": 22.5,
+      "humidity": 45.3,
+      "pressure": 1012.5,
+      "air_quality": 78.2
+  }
+  ```
+- **Response**:
+  ```json
+  {
+      "status": "success",
+      "worker_response": {
+          "status": "success",
+          "message": "Data forwarded to Cloudflare worker (mocked)."
+      }
+  }
+  ```
 
-## Development and Testing
+#### **GET /data**
+Retrieve all ingested data for analysis.
+- **Response**:
+  ```json
+  [
+      [1, 1735718918.0184543, 22.5, 45.3, 78.2]
+  ]
+  ```
 
-### Project Structure
-```
-IoT-and-Satellite-Enabled-Environmental-Monitoring-System/
-|-- src/
-|   |-- backend/       # API and server code
-|   |-- ai_ml/         # Predictive analytics models
-|   |-- iot_sensors/   # IoT data collection logic
-|   |-- utils/         # Utility modules
-|-- dashboard/         # Frontend dashboard files
-|-- tests/             # Unit and integration tests
-```
+### FastAPI Endpoints
+#### **POST /api/analytics/predict**
+Predict environmental trends using real-time or historical sensor data.
+- **Request Body**:
+  ```json
+  [
+      {
+          "timestamp": 1735718918.0184543,
+          "temperature": 22.5,
+          "humidity": 45.3,
+          "pressure": 1012.5,
+          "air_quality": 78.2
+      }
+  ]
+  ```
+- **Response**:
+  ```json
+  {
+      "status": "success",
+      "processed_data": {
+          "temperature_avg": 23.25,
+          "humidity_avg": 42.7,
+          "pressure_avg": 1011.4,
+          "air_quality_avg": 79.85
+      }
+  }
+  ```
 
+## Development
 ### Running Tests
-1. Install `pytest`:
-    ```bash
-    pip install pytest
-    ```
+1. Install test dependencies:
+   ```bash
+   pip install pytest
+   ```
+2. Run tests:
+   ```bash
+   pytest tests
+   ```
 
-2. Run all tests:
-    ```bash
-    pytest tests/
-    ```
-
-### Docker-Based Testing
-Refer to the `DOCKER_TESTING_README.md` file for detailed instructions on setting up and running tests in Docker.
-
----
-
-## Deployment
-
-### Cloudflare Workers
-1. Install the Cloudflare CLI:
-    ```bash
-    npm install -g wrangler
-    ```
-
-2. Authenticate with your Cloudflare account:
-    ```bash
-    wrangler login
-    ```
-
-3. Deploy the Worker:
-    ```bash
-    wrangler publish
-    ```
-
----
+### Docker Setup
+1. Build and start the Docker containers:
+   ```bash
+   docker-compose up --build
+   ```
+2. Access the Flask and FastAPI services as per the configurations in `docker-compose.yml`.
 
 ## Contributing
-Contributions are welcome! Please:
+We value contributions that enhance usability and functionality. To contribute:
 1. Fork the repository.
-2. Create a feature branch.
-3. Submit a pull request with a detailed description of your changes.
-
----
+2. Create a feature branch: `git checkout -b feature-name`.
+3. Commit changes: `git commit -m "Add feature"`.
+4. Push to your branch: `git push origin feature-name`.
+5. Create a pull request and describe your changes.
 
 ## License
-This project is licensed under the MIT License. See the `LICENSE` file for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
