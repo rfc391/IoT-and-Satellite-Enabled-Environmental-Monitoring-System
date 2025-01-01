@@ -1,24 +1,52 @@
 
 # IoT and Satellite-Enabled Environmental Monitoring System
 
-This project integrates IoT devices and satellite data to provide real-time environmental monitoring.
+## Overview
+This project enables IoT and satellite-based environmental monitoring, providing real-time data collection, predictive analytics, and public API access via GitHub Pages.
 
 ## Features
-- Real-time data collection from IoT sensors.
-- Satellite integration for remote monitoring.
-- Data visualization dashboards.
-- Predictive analytics powered by AI/ML.
+1. **IoT Data Collection**:
+   - Simulated real-time and batch IoT sensor data.
+   - Supports temperature, humidity, pressure, and air quality readings.
 
-## Project Structure
-- `src/`: Source code for system modules.
-- `tests/`: Automated tests (unit, integration, and end-to-end).
-- `configs/`: Configuration files.
-- `docs/`: Documentation for developers and end-users.
+2. **Predictive Analytics**:
+   - Utilizes machine learning for environmental trend predictions.
+   - Supports linear regression and random forest models.
 
-## Installation
-1. Clone the repository.
-2. Install dependencies: `pip install -r requirements.txt`.
-3. Run the application: `python src/backend/main.py`.
+3. **Public API via GitHub Pages**:
+   - Publishes IoT data and analytics results to GitHub Pages.
+   - Publicly accessible data served directly from a GitHub repository.
 
-## License
-MIT License.
+## Setup Instructions
+1. **Install Dependencies**:
+   - Run `pip install -r requirements.txt` to install required Python libraries.
+
+2. **Run the Application**:
+   - Start the FastAPI server: `uvicorn src.backend.api:app --reload`.
+   - Access API documentation at `http://127.0.0.1:8000/docs`.
+
+3. **Testing**:
+   - Execute `pytest tests` to run all test cases.
+
+4. **Publish Data to GitHub Pages**:
+   - Use the script `publish_to_github_pages.py`:
+     ```bash
+     python publish_to_github_pages.py
+     ```
+   - Replace `GITHUB_REPO_URL` in the script with your repository URL.
+
+## Example API Endpoints
+1. **Real-time Sensor Data**:
+   - URL: `GET /api/sensor/realtime`
+2. **Batch Sensor Data**:
+   - URL: `GET /api/sensor/batch?batch_size=5`
+3. **Predict Trends**:
+   - URL: `POST /api/analytics/predict`
+
+## GitHub Pages Example
+- Once published, data is available at `https://<your-username>.github.io/<repo-name>/iot_data.json`.
+
+---
+
+### License
+This project is licensed under the MIT License.
