@@ -1,21 +1,5 @@
 # IoT and Satellite-Enabled Environmental Monitoring System
 
-## Table of Contents
-- [Overview](#overview)
-- [Features](#features)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-- [Usage](#usage)
-  - [Running the Flask Backend](#running-the-flask-backend)
-  - [Running the FastAPI Backend](#running-the-fastapi-backend)
-- [Endpoints](#endpoints)
-  - [Flask Endpoints](#flask-endpoints)
-  - [FastAPI Endpoints](#fastapi-endpoints)
-- [Development](#development)
-- [Contributing](#contributing)
-- [License](#license)
-
 ## Overview
 This IoT and satellite-enabled system simplifies environmental monitoring by integrating modern sensor technologies with predictive analytics. The project focuses on usability, flexibility, and seamless deployment, making it ideal for research, industrial applications, and personal projects.
 
