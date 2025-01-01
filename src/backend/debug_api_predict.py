@@ -22,8 +22,12 @@ class SensorData(BaseModel):
 async def predict_trend(sensor_data: List[SensorData]):
     logger.debug("Received payload: %s", sensor_data)
     try:
-        # Convert list of Pydantic objects to DataFrame
-        df = pd.DataFrame([data.dict() for data in sensor_data])
+        # Validate payload explicitly
+        validated_data = [SensorData(**data.dict()) for data in sensor_data]
+        logger.debug("Validated payload: %s", validated_data)
+
+        # Convert to DataFrame for model processing
+        df = pd.DataFrame([data.dict() for data in validated_data])
         logger.debug("DataFrame created: %s", df)
 
         # Extract features and target
