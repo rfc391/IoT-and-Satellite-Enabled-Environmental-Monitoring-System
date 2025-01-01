@@ -33,7 +33,7 @@ This project enables IoT and satellite-based environmental monitoring, providing
      ```bash
      python publish_to_github_pages.py
      ```
-   - Replace `GITHUB_REPO_URL` in the script with your repository URL.
+   - Replace `https://rfc391.github.io/IoT-and-Satellite-Enabled-Environmental-Monitoring-System/` in the script with your repository URL.
 
 ## Example API Endpoints
 1. **Real-time Sensor Data**:
@@ -43,8 +43,8 @@ This project enables IoT and satellite-based environmental monitoring, providing
 3. **Predict Trends**:
    - URL: `POST /api/analytics/predict`
 
-## GitHub Pages Example
-- Once published, data is available at `https://<your-username>.github.io/<repo-name>/iot_data.json`.
+## GitHub Pages
+- Once published, data is available at `https://rfc391.github.io/IoT-and-Satellite-Enabled-Environmental-Monitoring-System/iot_data.json`.
 
 ---
 
