@@ -31,9 +31,8 @@ This project enables IoT and satellite-based environmental monitoring, providing
 4. **Publish Data to GitHub Pages**:
    - Use the script `publish_to_github_pages.py`:
      ```bash
-     python publish_to_github_pages.py
+     python https://rfc391.github.io/IoT-and-Satellite-Enabled-Environmental-Monitoring-System/.py
      ```
-   - Replace `https://rfc391.github.io/IoT-and-Satellite-Enabled-Environmental-Monitoring-System/` in the script with your repository URL.
 
 ## Example API Endpoints
 1. **Real-time Sensor Data**:
