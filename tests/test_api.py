@@ -1,4 +1,13 @@
 
+import sys
+sys.path.append(r"/mnt/data/IoT-and-Satellite-Enabled-Environmental-Monitoring-System-main/IoT-and-Satellite-Enabled-Environmental-Monitoring-System-main/src")
+
+from fastapi.testclient import TestClient
+from src.backend.api import app
+
+client = TestClient(app)
+
+
 def test_predict_trend():
     # Test payload
     sensor_data = [
