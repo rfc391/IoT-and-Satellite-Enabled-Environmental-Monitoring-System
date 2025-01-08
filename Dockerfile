@@ -17,3 +17,6 @@ ENV PYTHONUNBUFFERED 1
 
 # Command to run the application
 CMD ["python", "src/backend/main.py"]
+
+# Install gRPC tools
+RUN pip install grpcio grpcio-tools
