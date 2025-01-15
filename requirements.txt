@@ -1,4 +1,3 @@
-
 flask
 fastapi
 uvicorn
@@ -9,6 +8,7 @@ scikit-learn
 sqlalchemy
 requests
 pytest
-
 grpcio
 grpcio-tools
+opencv-python
+opencv-python-headless
