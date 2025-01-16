@@ -12,3 +12,6 @@ grpcio
 grpcio-tools
 opencv-python
 opencv-python-headless
+kafka-python
+redis
+ipfshttpclient
