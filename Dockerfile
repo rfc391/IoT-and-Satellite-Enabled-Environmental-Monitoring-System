@@ -20,3 +20,16 @@ CMD ["python", "src/backend/main.py"]
 
 # Install gRPC tools
 RUN pip install grpcio grpcio-tools
+
+# Add Kafka and RabbitMQ clients
+RUN apt-get update && apt-get install -y librdkafka-dev
+RUN pip install kafka-python
+
+# Add Redis support
+RUN pip install redis
+
+# Add IPFS client
+RUN pip install ipfshttpclient
+
+# Add NVIDIA Triton Inference Server client
+RUN pip install tritonclient[all]
