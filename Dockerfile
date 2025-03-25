@@ -1,6 +1,6 @@
 
 # Use the official Python image
-FROM python:3.14.0a1-slim
+FROM python:3.11-slim
 
 # Set the working directory
 WORKDIR /app
@@ -16,10 +16,10 @@ COPY . .
 ENV PYTHONUNBUFFERED 1
 
 # Command to run the application
+EXPOSE 5000
 CMD ["python", "src/backend/main.py"]
 
 # Install gRPC tools
-RUN pip install grpcio grpcio-tools
 
 # Add Kafka and RabbitMQ clients
 RUN apt-get update && apt-get install -y librdkafka-dev
