@@ -1,35 +1,18 @@
 
-# Use the official Python image
+# Minimal Hardened Dockerfile
 FROM python:3.11-slim
 
-# Set the working directory
 WORKDIR /app
 
-# Copy dependencies and install
-COPY requirements.txt ./
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the project files
-COPY . .
+COPY src ./src
+COPY cli.py .
+COPY setup.py .
 
-# Set environment variables
-ENV PYTHONUNBUFFERED 1
+ENV PYTHONUNBUFFERED=1
 
-# Command to run the application
-EXPOSE 5000
-CMD ["python", "src/backend/main.py"]
+HEALTHCHECK --interval=30s --timeout=10s --start-period=10s   CMD curl --fail http://localhost:8080 || exit 1
 
-# Install gRPC tools
-
-# Add Kafka and RabbitMQ clients
-RUN apt-get update && apt-get install -y librdkafka-dev
-RUN pip install kafka-python
-
-# Add Redis support
-RUN pip install redis
-
-# Add IPFS client
-RUN pip install ipfshttpclient
-
-# Add NVIDIA Triton Inference Server client
-RUN pip install tritonclient[all]
+ENTRYPOINT ["python", "cli.py", "--start"]

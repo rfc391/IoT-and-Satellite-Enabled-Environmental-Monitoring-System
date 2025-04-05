@@ -1,0 +1,14 @@
+
+[Unit]
+Description=IoT & Satellite Environmental Monitoring Service
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/iot_env_monitoring
+ExecStart=/usr/bin/python3 /opt/iot_env_monitoring/cli.py --start
+Restart=always
+User=root
+
+[Install]
+WantedBy=multi-user.target

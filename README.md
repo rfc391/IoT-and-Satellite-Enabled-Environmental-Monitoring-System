@@ -1,118 +1,100 @@
 
-# IoT and Satellite-Enabled Environmental Monitoring System
+# IoT and Satellite-Enabled Environmental Monitoring System 🌍🛰️
 
-## Overview
+A cross-platform, field-ready system for collecting, analyzing, and visualizing environmental data using a hybrid of IoT sensors and satellite telemetry. Built for researchers, security ops, and environmental intelligence.
 
-This project combines IoT devices with satellite communication to enable **real-time environmental monitoring**. Designed with a modular architecture, it supports diverse applications such as climate research, disaster response, and precision agriculture. The system adheres to **ISO 27001/27701 standards**, aligns with **DARPA compliance**, and is **GDPR-compliant**.
+---
 
-## Key Features
+## 🚀 Features
 
-- **IoT Sensor Data Ingestion**: Collects and processes temperature, humidity, and air quality data.
-- **Advanced Analytics**: Utilizes AI/ML models for image processing, trend analysis, and anomaly detection.
-- **Satellite Integration**: Ensures seamless data communication across remote locations.
-- **Secure Architecture**:
-  - Zero Trust framework via Cloudflare.
-  - Quantum-safe encryption using QKD and PQC.
-- **Real-Time Processing**: Enabled by Kafka, RabbitMQ, and NVIDIA Triton.
-- **Decentralized Storage**: IPFS-backed immutability with redundancy.
-- **Scalability**: Supports containerized deployment using Docker/Kubernetes.
+- 🌐 Satellite + IoT Sensor Data Integration
+- 📊 Real-Time Dashboard Interface
+- 📦 Multi-Platform Support (.deb, .exe, .AppImage)
+- 🔐 Secure GPG/Cloudflare Integration
+- ⚙️ Offline & Airgap Support
+- 🧪 Full CI/CD Pipeline with Pytest + GitHub Actions
+- 🧠 Built-in AI Recon Tools (Pluggable)
 
-## Architecture Diagram
+---
 
-_TODO: Add diagram for system architecture._
+## 📁 File Structure
 
-## Prerequisites
-
-- Python 3.10+
-- Docker and Docker Compose
-- NVIDIA GPU (for AI/ML processing)
-
-## Setup Instructions
-
-### 1. Clone the Repository
-
-```bash
-git clone https://github.com/rfc391/IoT-and-Satellite-Enabled-Environmental-Monitoring-System.git
-cd IoT-and-Satellite-Enabled-Environmental-Monitoring-System
+```
+.
+├── dashboard/              # Dashboard UI (HTML/CSS/JS)
+├── src/                    # Core Python backend
+├── tests/                  # Full unit tests (pytest)
+├── Dockerfile              # Production Docker build
+├── docker-compose.yml      # Multi-container setup
+├── requirements.txt        # Python dependencies
+├── example.proto           # Protocol Buffers format
+├── .github/                # CI/CD workflows
 ```
 
-### 2. Install Dependencies
+---
 
-```bash
-pip install -r requirements.txt
-```
+## 💻 Installation
 
-### 3. Configure Frameworks
-
-Ensure the following services are running:
-
-- Kafka and RabbitMQ for data streaming.
-- Redis for caching.
-- IPFS Cluster for decentralized storage.
-
-### 4. Run Locally
-
-```bash
-python main.py
-```
-
-Access the application at `http://localhost:5000`.
-
-### 5. Run with Docker
+### 🐳 Docker (Recommended)
 
 ```bash
 docker-compose up --build
 ```
 
-### 6. Testing
+### 🐧 Linux (.deb / .AppImage)
 
 ```bash
-pytest
+./build.sh
+sudo dpkg -i dist/env-monitoring.deb
 ```
 
-## API Reference
+### 🪟 Windows (.exe)
 
-### `/ingest`
+Download the `.exe` from [Releases](https://github.com/rfc391/IoT-and-Satellite-Enabled-Environmental-Monitoring-System/releases)
 
-- **Method**: POST
-- **Description**: Ingests IoT sensor data.
-- **Payload**:
+---
 
-```json
-{
-  "timestamp": 1672531200,
-  "temperature": 22.5,
-  "humidity": 45.0,
-  "air_quality": 85.0
-}
+## 🧪 Run Tests
+
+```bash
+pytest tests/
 ```
 
-### `/data`
+---
 
-- **Method**: GET
-- **Description**: Fetches stored sensor data.
+## 📊 Dashboard
 
-### `/process-image`
+Access via: `http://localhost:8080`
 
-- **Method**: POST
-- **Description**: Processes an uploaded image.
-- **Payload**: Multipart/form-data with an `image` file.
+- Realtime metrics
+- Device health
+- Satellite overlays (coming soon)
+- Alert system
 
-## Compliance
+---
 
-- **ISO Standards**: ISO 27001/27701 for information security and privacy.
-- **DARPA Alignment**: High-performance frameworks ensure real-time data handling.
-- **GDPR**: All data processing is GDPR-compliant.
+## 🤝 Contributing
 
-## CI/CD Workflow
+1. Fork this repo
+2. Create a new branch (`feature/new-feature`)
+3. Commit your changes
+4. Push and open a PR
 
-- Automated pipeline for testing, building, and deploying using GitHub Actions.
-- Real-time feedback with integrated AI-based analytics.
+---
 
-## Contributing
+## 📜 License
 
-Contributions are welcome! Submit a pull request or open an issue to discuss improvements.
+MIT © [rfc391](https://github.com/rfc391)
 
-## License
+---
 
-Licensed under the MIT License. See `LICENSE` for details.
+## 🛡️ Security Policy
+
+See [SECURITY.md](SECURITY.md)
+
+---
+
+## 📷 Demo
+
+![Demo Dashboard](docs/demo.gif)
+

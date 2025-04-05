@@ -1,21 +1,25 @@
-# Security Policy
+
+# 🔐 Security Policy
 
 ## Supported Versions
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
-
 | Version | Supported          |
 | ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+| 1.0.x   | ✅                 |
+| < 1.0   | ❌                 |
 
-## Reporting a Vulnerability
+## 📢 Reporting a Vulnerability
 
-Use this section to tell people how to report a vulnerability.
+If you discover a security vulnerability, please contact us via:
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+- Email: robshubert96@gmail.com
+- GPG Key: Available upon request
+
+We will respond within **24 hours** and coordinate a private fix.
+
+## 🛡️ Hardening Tips
+
+- Always run behind a Cloudflare Zero Trust Tunnel
+- Use GPG to encrypt sensitive logs and sensor data
+- Regularly update dependencies via `pip install --upgrade -r requirements.txt`
+- Enable container security scanning via Trivy
