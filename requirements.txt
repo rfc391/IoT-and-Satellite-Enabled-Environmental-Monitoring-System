@@ -1,0 +1,8 @@
+flask
+requests
+protobuf
+python-dotenv
+pyserial
+pytest
+gunicorn
+zipp>=3.19.1 # not directly required, pinned by Snyk to avoid a vulnerability
